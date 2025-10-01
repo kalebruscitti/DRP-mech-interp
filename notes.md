@@ -34,11 +34,11 @@
 
 5. **Unembedding**  
    - Multiply by the unembedding matrix:  
-     W_U ∈ ℝ^(128 × 113)  
+     W_U ∈ ℝ^{128 × 113}
    - Produces logits:  
-     logits ∈ ℝ^(113)
+     logits ∈ ℝ^{113}
 
 6. **Softmax & Prediction**  
    - Apply softmax to convert logits into probabilities.  
-   - The highest-probability token is selected as the model’s prediction for (a + b mod 113).
+   - The highest-probability token is selected as the model’s prediction for $(a + b \mod 113)$.
 
