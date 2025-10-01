@@ -5,20 +5,20 @@
 1. **Input as one-hot vectors**  
    - Each token in the input $(a, b, =)$ is turned into a one-hot vector of length 113.  
    - These form the matrix:  
-     $X \in \mathb{R}^{3 × 113}$
+     $X \in \mathbb{R}^{3 × 113}$
 
 2. **Embedding**  
    - Multiply by the embedding matrix:  
-     $W_E \in \mathb{R}^{113 × 128}$
+     $W_E \in \mathbb{R}^{113 × 128}$
    - Result:  
-     $X \cdot W_E \in \mathb{R}^{3 × 128}$ 
+     $X \cdot W_E \in \mathbb{R}^{3 × 128}$ 
      → three 128-dimensional embedded vectors $(v_a, v_b, v_=)$.
 
 3. **Transformer Block**  
    - **Attention phase:**  
      - Each embedding is projected into queries, keys, and values:  
        $Q = XW_Q,   K = XW_K,   V = XW_V$
-       with $W_Q, W_K, W_V \in \mathb{R}^{128 × 32}$ per head (in our case, we have 4 attention heads).  
+       with $W_Q, W_K, W_V \in \mathbb{R}^{128 × 32}$ per head (in our case, we have 4 attention heads).  
      - Attention scores:  
        $softmax((QK^T) / sqrt(d_{head}))V $
        → the "=" token attends to both a and b and collects their information.
@@ -26,7 +26,7 @@
    - **MLP phase:**  
      - Each updated token vector goes through a two-layer feedforward network:  
        $MLP(x) = \sigma(xW_{in}) W_{out}$
-       where $W_{in} ∈ \mathb{R}^{(128 × d_{mlp})}, W_{out} \in \mathb{R}^{(d_{mlp} × 128)}$.  
+       where $W_{in} ∈ \mathbb{R}^{(128 × d_{mlp})}, W_{out} \in \mathbb{R}^{(d_{mlp} × 128)}$.  
      - This step encodes the addition operation in the hidden representation.
 
 4. **Final hidden vector**  
@@ -34,9 +34,9 @@
 
 5. **Unembedding**  
    - Multiply by the unembedding matrix:  
-     $W_U \in \mathb{R}^{128 × 113}$
+     $W_U \in \mathbb{R}^{128 × 113}$
    - Produces logits:  
-     $logits \in \mathb{R}^{113}$
+     $logits \in \mathbb{R}^{113}$
 
 6. **Softmax & Prediction**  
    - Apply softmax to convert logits into probabilities.  
